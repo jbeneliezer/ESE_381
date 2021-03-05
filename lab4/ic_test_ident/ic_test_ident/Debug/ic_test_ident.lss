@@ -1,0 +1,614 @@
+
+ic_test_ident.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000018  00804000  00000404  00000498  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000404  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000003  00804018  00804018  000004b0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000004b0  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000004e0  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000030  00000000  00000000  00000520  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000031be  00000000  00000000  00000550  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00002e42  00000000  00000000  0000370e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000519  00000000  00000000  00006550  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000044  00000000  00000000  00006a6c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000016bf  00000000  00000000  00006ab0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000000a3  00000000  00000000  0000816f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000020  00000000  00000000  00008212  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 7a 00 	jmp	0xf4	; 0xf4 <__ctors_end>
+   4:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+   8:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+   c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  10:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  14:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  18:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  1c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  20:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  24:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  28:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  2c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  30:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  34:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  38:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  3c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  40:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  44:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  48:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  4c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  50:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  54:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  58:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  5c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  60:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  64:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  68:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  6c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  70:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  74:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  78:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  7c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  80:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  84:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  88:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  8c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  90:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  94:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  98:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  9c:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  a0:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  a4:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  a8:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  ac:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  b0:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  b4:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  b8:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  bc:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  c0:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  c4:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  c8:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  cc:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  d0:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  d4:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  d8:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  dc:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  e0:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  e4:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  e8:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  ec:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+  f0:	0c 94 99 00 	jmp	0x132	; 0x132 <__bad_interrupt>
+
+000000f4 <__ctors_end>:
+  f4:	11 24       	eor	r1, r1
+  f6:	1f be       	out	0x3f, r1	; 63
+  f8:	cf ef       	ldi	r28, 0xFF	; 255
+  fa:	cd bf       	out	0x3d, r28	; 61
+  fc:	df e7       	ldi	r29, 0x7F	; 127
+  fe:	de bf       	out	0x3e, r29	; 62
+
+00000100 <__do_copy_data>:
+ 100:	10 e4       	ldi	r17, 0x40	; 64
+ 102:	a0 e0       	ldi	r26, 0x00	; 0
+ 104:	b0 e4       	ldi	r27, 0x40	; 64
+ 106:	e4 e0       	ldi	r30, 0x04	; 4
+ 108:	f4 e0       	ldi	r31, 0x04	; 4
+ 10a:	00 e0       	ldi	r16, 0x00	; 0
+ 10c:	0b bf       	out	0x3b, r16	; 59
+ 10e:	02 c0       	rjmp	.+4      	; 0x114 <__do_copy_data+0x14>
+ 110:	07 90       	elpm	r0, Z+
+ 112:	0d 92       	st	X+, r0
+ 114:	a8 31       	cpi	r26, 0x18	; 24
+ 116:	b1 07       	cpc	r27, r17
+ 118:	d9 f7       	brne	.-10     	; 0x110 <__do_copy_data+0x10>
+
+0000011a <__do_clear_bss>:
+ 11a:	20 e4       	ldi	r18, 0x40	; 64
+ 11c:	a8 e1       	ldi	r26, 0x18	; 24
+ 11e:	b0 e4       	ldi	r27, 0x40	; 64
+ 120:	01 c0       	rjmp	.+2      	; 0x124 <.do_clear_bss_start>
+
+00000122 <.do_clear_bss_loop>:
+ 122:	1d 92       	st	X+, r1
+
+00000124 <.do_clear_bss_start>:
+ 124:	ab 31       	cpi	r26, 0x1B	; 27
+ 126:	b2 07       	cpc	r27, r18
+ 128:	e1 f7       	brne	.-8      	; 0x122 <.do_clear_bss_loop>
+ 12a:	0e 94 25 01 	call	0x24a	; 0x24a <main>
+ 12e:	0c 94 00 02 	jmp	0x400	; 0x400 <_exit>
+
+00000132 <__bad_interrupt>:
+ 132:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000136 <test>:
+
+uint8_t i, j;
+
+uint8_t test(uint8_t gate) {
+	//turn DUT pin 14 on
+	PORTE_OUT |= PIN3_bm;
+ 136:	e4 e8       	ldi	r30, 0x84	; 132
+ 138:	f4 e0       	ldi	r31, 0x04	; 4
+ 13a:	90 81       	ld	r25, Z
+ 13c:	98 60       	ori	r25, 0x08	; 8
+ 13e:	90 83       	st	Z, r25
+
+	for (i = 0; i < 4; ++i) {
+ 140:	10 92 1a 40 	sts	0x401A, r1	; 0x80401a <i>
+ 144:	32 c0       	rjmp	.+100    	; 0x1aa <test+0x74>
+		PORTC_OUT = stimulus[i];
+ 146:	f0 e0       	ldi	r31, 0x00	; 0
+ 148:	ec 5e       	subi	r30, 0xEC	; 236
+ 14a:	ff 4b       	sbci	r31, 0xBF	; 191
+ 14c:	90 81       	ld	r25, Z
+ 14e:	90 93 44 04 	sts	0x0444, r25	; 0x800444 <__TEXT_REGION_LENGTH__+0x7e0444>
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 152:	92 e0       	ldi	r25, 0x02	; 2
+ 154:	9a 95       	dec	r25
+ 156:	f1 f7       	brne	.-4      	; 0x154 <test+0x1e>
+			
+		_delay_loop_1(2);
+			
+		uint8_t a_in = (PORTA_IN & A_GATES_OUT_gm) >> 3 & 0x03;
+ 158:	20 91 08 04 	lds	r18, 0x0408	; 0x800408 <__TEXT_REGION_LENGTH__+0x7e0408>
+ 15c:	2f 71       	andi	r18, 0x1F	; 31
+ 15e:	30 e0       	ldi	r19, 0x00	; 0
+ 160:	35 95       	asr	r19
+ 162:	27 95       	ror	r18
+ 164:	35 95       	asr	r19
+ 166:	27 95       	ror	r18
+ 168:	35 95       	asr	r19
+ 16a:	27 95       	ror	r18
+ 16c:	42 2f       	mov	r20, r18
+ 16e:	43 70       	andi	r20, 0x03	; 3
+		uint8_t b_in = (PORTB_IN & B_GATES_OUT_gm) >> 2 & 0x0C;
+ 170:	90 91 28 04 	lds	r25, 0x0428	; 0x800428 <__TEXT_REGION_LENGTH__+0x7e0428>
+ 174:	90 73       	andi	r25, 0x30	; 48
+ 176:	29 2f       	mov	r18, r25
+ 178:	30 e0       	ldi	r19, 0x00	; 0
+ 17a:	35 95       	asr	r19
+ 17c:	27 95       	ror	r18
+ 17e:	35 95       	asr	r19
+ 180:	27 95       	ror	r18
+ 182:	2c 70       	andi	r18, 0x0C	; 12
+
+		if (!((a_in | b_in) == verify[gate][i])) break;
+ 184:	24 2b       	or	r18, r20
+ 186:	90 91 1a 40 	lds	r25, 0x401A	; 0x80401a <i>
+ 18a:	e8 2f       	mov	r30, r24
+ 18c:	f0 e0       	ldi	r31, 0x00	; 0
+ 18e:	ee 0f       	add	r30, r30
+ 190:	ff 1f       	adc	r31, r31
+ 192:	ee 0f       	add	r30, r30
+ 194:	ff 1f       	adc	r31, r31
+ 196:	e0 50       	subi	r30, 0x00	; 0
+ 198:	f0 4c       	sbci	r31, 0xC0	; 192
+ 19a:	e9 0f       	add	r30, r25
+ 19c:	f1 1d       	adc	r31, r1
+ 19e:	30 81       	ld	r19, Z
+ 1a0:	23 13       	cpse	r18, r19
+ 1a2:	07 c0       	rjmp	.+14     	; 0x1b2 <test+0x7c>
+
+uint8_t test(uint8_t gate) {
+	//turn DUT pin 14 on
+	PORTE_OUT |= PIN3_bm;
+
+	for (i = 0; i < 4; ++i) {
+ 1a4:	9f 5f       	subi	r25, 0xFF	; 255
+ 1a6:	90 93 1a 40 	sts	0x401A, r25	; 0x80401a <i>
+ 1aa:	e0 91 1a 40 	lds	r30, 0x401A	; 0x80401a <i>
+ 1ae:	e4 30       	cpi	r30, 0x04	; 4
+ 1b0:	50 f2       	brcs	.-108    	; 0x146 <test+0x10>
+
+		if (!((a_in | b_in) == verify[gate][i])) break;
+		
+	}
+
+	if (i == 4) return 1;
+ 1b2:	80 91 1a 40 	lds	r24, 0x401A	; 0x80401a <i>
+ 1b6:	84 30       	cpi	r24, 0x04	; 4
+ 1b8:	11 f4       	brne	.+4      	; 0x1be <test+0x88>
+ 1ba:	81 e0       	ldi	r24, 0x01	; 1
+ 1bc:	08 95       	ret
+	else return 0;
+ 1be:	80 e0       	ldi	r24, 0x00	; 0
+	
+	
+}
+ 1c0:	08 95       	ret
+
+000001c2 <identify>:
+				
+uint8_t identify() {
+
+	for (j = 0; j < 4; ++j) {
+ 1c2:	10 92 18 40 	sts	0x4018, r1	; 0x804018 <__data_end>
+ 1c6:	0c c0       	rjmp	.+24     	; 0x1e0 <identify+0x1e>
+		if (test(j) == 1) return j;
+ 1c8:	0e 94 9b 00 	call	0x136	; 0x136 <test>
+ 1cc:	81 30       	cpi	r24, 0x01	; 1
+ 1ce:	19 f4       	brne	.+6      	; 0x1d6 <identify+0x14>
+ 1d0:	80 91 18 40 	lds	r24, 0x4018	; 0x804018 <__data_end>
+ 1d4:	08 95       	ret
+	
+}
+				
+uint8_t identify() {
+
+	for (j = 0; j < 4; ++j) {
+ 1d6:	80 91 18 40 	lds	r24, 0x4018	; 0x804018 <__data_end>
+ 1da:	8f 5f       	subi	r24, 0xFF	; 255
+ 1dc:	80 93 18 40 	sts	0x4018, r24	; 0x804018 <__data_end>
+ 1e0:	80 91 18 40 	lds	r24, 0x4018	; 0x804018 <__data_end>
+ 1e4:	84 30       	cpi	r24, 0x04	; 4
+ 1e6:	80 f3       	brcs	.-32     	; 0x1c8 <identify+0x6>
+		if (test(j) == 1) return j;
+	}
+	//enable pullups
+	PORTA_PIN4CTRL |= PORT_PULLUPEN_bm;
+ 1e8:	e4 e1       	ldi	r30, 0x14	; 20
+ 1ea:	f4 e0       	ldi	r31, 0x04	; 4
+ 1ec:	80 81       	ld	r24, Z
+ 1ee:	88 60       	ori	r24, 0x08	; 8
+ 1f0:	80 83       	st	Z, r24
+	PORTA_PIN3CTRL |= PORT_PULLUPEN_bm;
+ 1f2:	e3 e1       	ldi	r30, 0x13	; 19
+ 1f4:	f4 e0       	ldi	r31, 0x04	; 4
+ 1f6:	80 81       	ld	r24, Z
+ 1f8:	88 60       	ori	r24, 0x08	; 8
+ 1fa:	80 83       	st	Z, r24
+	PORTB_PIN5CTRL |= PORT_PULLUPEN_bm;
+ 1fc:	e5 e3       	ldi	r30, 0x35	; 53
+ 1fe:	f4 e0       	ldi	r31, 0x04	; 4
+ 200:	80 81       	ld	r24, Z
+ 202:	88 60       	ori	r24, 0x08	; 8
+ 204:	80 83       	st	Z, r24
+	PORTB_PIN4CTRL |= PORT_PULLUPEN_bm;
+ 206:	e4 e3       	ldi	r30, 0x34	; 52
+ 208:	f4 e0       	ldi	r31, 0x04	; 4
+ 20a:	80 81       	ld	r24, Z
+ 20c:	88 60       	ori	r24, 0x08	; 8
+ 20e:	80 83       	st	Z, r24
+	if (test(4) == 1)  {
+ 210:	84 e0       	ldi	r24, 0x04	; 4
+ 212:	0e 94 9b 00 	call	0x136	; 0x136 <test>
+ 216:	81 30       	cpi	r24, 0x01	; 1
+ 218:	b1 f4       	brne	.+44     	; 0x246 <__EEPROM_REGION_LENGTH__+0x46>
+		PORTA_PIN4CTRL &= ~PORT_PULLUPEN_bm;
+ 21a:	e4 e1       	ldi	r30, 0x14	; 20
+ 21c:	f4 e0       	ldi	r31, 0x04	; 4
+ 21e:	80 81       	ld	r24, Z
+ 220:	87 7f       	andi	r24, 0xF7	; 247
+ 222:	80 83       	st	Z, r24
+		PORTA_PIN3CTRL &= ~PORT_PULLUPEN_bm;
+ 224:	e3 e1       	ldi	r30, 0x13	; 19
+ 226:	f4 e0       	ldi	r31, 0x04	; 4
+ 228:	80 81       	ld	r24, Z
+ 22a:	87 7f       	andi	r24, 0xF7	; 247
+ 22c:	80 83       	st	Z, r24
+		PORTB_PIN5CTRL &= ~PORT_PULLUPEN_bm;
+ 22e:	e5 e3       	ldi	r30, 0x35	; 53
+ 230:	f4 e0       	ldi	r31, 0x04	; 4
+ 232:	80 81       	ld	r24, Z
+ 234:	87 7f       	andi	r24, 0xF7	; 247
+ 236:	80 83       	st	Z, r24
+		PORTB_PIN4CTRL &= ~PORT_PULLUPEN_bm;
+ 238:	e4 e3       	ldi	r30, 0x34	; 52
+ 23a:	f4 e0       	ldi	r31, 0x04	; 4
+ 23c:	80 81       	ld	r24, Z
+ 23e:	87 7f       	andi	r24, 0xF7	; 247
+ 240:	80 83       	st	Z, r24
+		return 4;
+ 242:	84 e0       	ldi	r24, 0x04	; 4
+ 244:	08 95       	ret
+	}
+	
+
+	return 7;
+ 246:	87 e0       	ldi	r24, 0x07	; 7
+}
+ 248:	08 95       	ret
+
+0000024a <main>:
+
+int main(void)
+{
+	PORTA_DIRSET &= PA_setup_gm;
+ 24a:	e1 e0       	ldi	r30, 0x01	; 1
+ 24c:	f4 e0       	ldi	r31, 0x04	; 4
+ 24e:	80 81       	ld	r24, Z
+ 250:	87 70       	andi	r24, 0x07	; 7
+ 252:	80 83       	st	Z, r24
+	PORTB_DIRSET &= PB_setup_gm;
+ 254:	e1 e2       	ldi	r30, 0x21	; 33
+ 256:	f4 e0       	ldi	r31, 0x04	; 4
+ 258:	80 81       	ld	r24, Z
+ 25a:	8f 7c       	andi	r24, 0xCF	; 207
+ 25c:	80 83       	st	Z, r24
+	PORTC_DIRSET |= PC_setup_gm;
+ 25e:	e1 e4       	ldi	r30, 0x41	; 65
+ 260:	f4 e0       	ldi	r31, 0x04	; 4
+ 262:	80 81       	ld	r24, Z
+ 264:	8f ef       	ldi	r24, 0xFF	; 255
+ 266:	80 83       	st	Z, r24
+	PORTD_DIRSET |= PD_setup_gm;
+ 268:	e1 e6       	ldi	r30, 0x61	; 97
+ 26a:	f4 e0       	ldi	r31, 0x04	; 4
+ 26c:	80 81       	ld	r24, Z
+ 26e:	87 60       	ori	r24, 0x07	; 7
+ 270:	80 83       	st	Z, r24
+	PORTE_DIRSET |= PE_setup_gm;
+ 272:	e1 e8       	ldi	r30, 0x81	; 129
+ 274:	f4 e0       	ldi	r31, 0x04	; 4
+ 276:	80 81       	ld	r24, Z
+ 278:	8f 60       	ori	r24, 0x0F	; 15
+ 27a:	80 83       	st	Z, r24
+	PORTF_DIRSET &= PF_setup_gm;
+ 27c:	e1 ea       	ldi	r30, 0xA1	; 161
+ 27e:	f4 e0       	ldi	r31, 0x04	; 4
+ 280:	80 81       	ld	r24, Z
+ 282:	87 7f       	andi	r24, 0xF7	; 247
+ 284:	80 83       	st	Z, r24
+	
+	PORTA_PIN7CTRL |= PORT_PULLUPEN_bm;
+ 286:	e7 e1       	ldi	r30, 0x17	; 23
+ 288:	f4 e0       	ldi	r31, 0x04	; 4
+ 28a:	80 81       	ld	r24, Z
+ 28c:	88 60       	ori	r24, 0x08	; 8
+ 28e:	80 83       	st	Z, r24
+	PORTA_PIN6CTRL |= PORT_PULLUPEN_bm;
+ 290:	e6 e1       	ldi	r30, 0x16	; 22
+ 292:	f4 e0       	ldi	r31, 0x04	; 4
+ 294:	80 81       	ld	r24, Z
+ 296:	88 60       	ori	r24, 0x08	; 8
+ 298:	80 83       	st	Z, r24
+	PORTA_PIN5CTRL |= PORT_PULLUPEN_bm;
+ 29a:	e5 e1       	ldi	r30, 0x15	; 21
+ 29c:	f4 e0       	ldi	r31, 0x04	; 4
+ 29e:	80 81       	ld	r24, Z
+ 2a0:	88 60       	ori	r24, 0x08	; 8
+ 2a2:	80 83       	st	Z, r24
+	PORTA_PIN4CTRL |= PORT_PULLUPEN_bm;
+ 2a4:	e4 e1       	ldi	r30, 0x14	; 20
+ 2a6:	f4 e0       	ldi	r31, 0x04	; 4
+ 2a8:	80 81       	ld	r24, Z
+ 2aa:	88 60       	ori	r24, 0x08	; 8
+ 2ac:	80 83       	st	Z, r24
+	PORTA_PIN3CTRL |= PORT_PULLUPEN_bm;
+ 2ae:	e3 e1       	ldi	r30, 0x13	; 19
+ 2b0:	f4 e0       	ldi	r31, 0x04	; 4
+ 2b2:	80 81       	ld	r24, Z
+ 2b4:	88 60       	ori	r24, 0x08	; 8
+ 2b6:	80 83       	st	Z, r24
+	PORTF_PIN3CTRL |= PORT_PULLUPEN_bm;
+ 2b8:	e3 eb       	ldi	r30, 0xB3	; 179
+ 2ba:	f4 e0       	ldi	r31, 0x04	; 4
+ 2bc:	80 81       	ld	r24, Z
+ 2be:	88 60       	ori	r24, 0x08	; 8
+ 2c0:	80 83       	st	Z, r24
+
+	PORTD_OUT = ~BARGRAPH_gm;
+ 2c2:	a4 e6       	ldi	r26, 0x64	; 100
+ 2c4:	b4 e0       	ldi	r27, 0x04	; 4
+ 2c6:	88 ef       	ldi	r24, 0xF8	; 248
+ 2c8:	8c 93       	st	X, r24
+	PORTE_OUT &= ~(TIP_bm | PASS_bm | FAIL_bm);
+ 2ca:	e4 e8       	ldi	r30, 0x84	; 132
+ 2cc:	f4 e0       	ldi	r31, 0x04	; 4
+ 2ce:	80 81       	ld	r24, Z
+ 2d0:	88 7f       	andi	r24, 0xF8	; 248
+ 2d2:	80 83       	st	Z, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2d4:	2f ef       	ldi	r18, 0xFF	; 255
+ 2d6:	84 e3       	ldi	r24, 0x34	; 52
+ 2d8:	9c e0       	ldi	r25, 0x0C	; 12
+ 2da:	21 50       	subi	r18, 0x01	; 1
+ 2dc:	80 40       	sbci	r24, 0x00	; 0
+ 2de:	90 40       	sbci	r25, 0x00	; 0
+ 2e0:	e1 f7       	brne	.-8      	; 0x2da <main+0x90>
+ 2e2:	00 c0       	rjmp	.+0      	; 0x2e4 <main+0x9a>
+ 2e4:	00 00       	nop
+	_delay_ms(1000);
+	PORTD_OUT |= BARGRAPH_gm;
+ 2e6:	8c 91       	ld	r24, X
+ 2e8:	87 60       	ori	r24, 0x07	; 7
+ 2ea:	8c 93       	st	X, r24
+	PORTE_OUT |= TIP_bm | PASS_bm | FAIL_bm;
+ 2ec:	80 81       	ld	r24, Z
+ 2ee:	87 60       	ori	r24, 0x07	; 7
+ 2f0:	80 83       	st	Z, r24
+
+    while (1) 
+    {
+		if ((PORTF_IN & START_PB_bm) != 0) continue;
+ 2f2:	80 91 a8 04 	lds	r24, 0x04A8	; 0x8004a8 <__TEXT_REGION_LENGTH__+0x7e04a8>
+ 2f6:	83 fd       	sbrc	r24, 3
+ 2f8:	fc cf       	rjmp	.-8      	; 0x2f2 <main+0xa8>
+		
+		PORTD_OUT = BARGRAPH_gm;
+ 2fa:	e4 e6       	ldi	r30, 0x64	; 100
+ 2fc:	f4 e0       	ldi	r31, 0x04	; 4
+ 2fe:	87 e0       	ldi	r24, 0x07	; 7
+ 300:	80 83       	st	Z, r24
+
+		PORTE_OUT = ~TIP_bm;
+ 302:	8b ef       	ldi	r24, 0xFB	; 251
+ 304:	80 93 84 04 	sts	0x0484, r24	; 0x800484 <__TEXT_REGION_LENGTH__+0x7e0484>
+
+		gate_type = ~(PORTA_IN | 0x1F) >> 5 & 0x07;
+ 308:	80 91 08 04 	lds	r24, 0x0408	; 0x800408 <__TEXT_REGION_LENGTH__+0x7e0408>
+ 30c:	8f 61       	ori	r24, 0x1F	; 31
+ 30e:	90 e0       	ldi	r25, 0x00	; 0
+ 310:	80 95       	com	r24
+ 312:	90 95       	com	r25
+ 314:	95 95       	asr	r25
+ 316:	87 95       	ror	r24
+ 318:	95 95       	asr	r25
+ 31a:	87 95       	ror	r24
+ 31c:	95 95       	asr	r25
+ 31e:	87 95       	ror	r24
+ 320:	95 95       	asr	r25
+ 322:	87 95       	ror	r24
+ 324:	95 95       	asr	r25
+ 326:	87 95       	ror	r24
+ 328:	87 70       	andi	r24, 0x07	; 7
+ 32a:	80 93 19 40 	sts	0x4019, r24	; 0x804019 <gate_type>
+		
+		PORTD_OUT &= ~(gate_type & BARGRAPH_gm);
+ 32e:	90 81       	ld	r25, Z
+ 330:	80 95       	com	r24
+ 332:	89 23       	and	r24, r25
+ 334:	80 83       	st	Z, r24
+	
+		if (gate_type == 0x04) {
+ 336:	80 91 19 40 	lds	r24, 0x4019	; 0x804019 <gate_type>
+ 33a:	84 30       	cpi	r24, 0x04	; 4
+ 33c:	d1 f5       	brne	.+116    	; 0x3b2 <main+0x168>
+			//enable pullups
+			PORTA_PIN4CTRL |= PORT_PULLUPEN_bm;
+ 33e:	e4 e1       	ldi	r30, 0x14	; 20
+ 340:	f4 e0       	ldi	r31, 0x04	; 4
+ 342:	80 81       	ld	r24, Z
+ 344:	88 60       	ori	r24, 0x08	; 8
+ 346:	80 83       	st	Z, r24
+			PORTA_PIN3CTRL |= PORT_PULLUPEN_bm;
+ 348:	e3 e1       	ldi	r30, 0x13	; 19
+ 34a:	f4 e0       	ldi	r31, 0x04	; 4
+ 34c:	80 81       	ld	r24, Z
+ 34e:	88 60       	ori	r24, 0x08	; 8
+ 350:	80 83       	st	Z, r24
+			PORTB_PIN5CTRL |= PORT_PULLUPEN_bm;
+ 352:	e5 e3       	ldi	r30, 0x35	; 53
+ 354:	f4 e0       	ldi	r31, 0x04	; 4
+ 356:	80 81       	ld	r24, Z
+ 358:	88 60       	ori	r24, 0x08	; 8
+ 35a:	80 83       	st	Z, r24
+			PORTB_PIN4CTRL |= PORT_PULLUPEN_bm;
+ 35c:	e4 e3       	ldi	r30, 0x34	; 52
+ 35e:	f4 e0       	ldi	r31, 0x04	; 4
+ 360:	80 81       	ld	r24, Z
+ 362:	88 60       	ori	r24, 0x08	; 8
+ 364:	80 83       	st	Z, r24
+			if (test(gate_type) == 1) PORTE_OUT &= ~PASS_bm;
+ 366:	80 91 19 40 	lds	r24, 0x4019	; 0x804019 <gate_type>
+ 36a:	0e 94 9b 00 	call	0x136	; 0x136 <test>
+ 36e:	81 30       	cpi	r24, 0x01	; 1
+ 370:	31 f4       	brne	.+12     	; 0x37e <main+0x134>
+ 372:	e4 e8       	ldi	r30, 0x84	; 132
+ 374:	f4 e0       	ldi	r31, 0x04	; 4
+ 376:	80 81       	ld	r24, Z
+ 378:	8e 7f       	andi	r24, 0xFE	; 254
+ 37a:	80 83       	st	Z, r24
+ 37c:	05 c0       	rjmp	.+10     	; 0x388 <main+0x13e>
+			else PORTE_OUT &= ~FAIL_bm;
+ 37e:	e4 e8       	ldi	r30, 0x84	; 132
+ 380:	f4 e0       	ldi	r31, 0x04	; 4
+ 382:	80 81       	ld	r24, Z
+ 384:	8d 7f       	andi	r24, 0xFD	; 253
+ 386:	80 83       	st	Z, r24
+			PORTA_PIN4CTRL &= ~PORT_PULLUPEN_bm;
+ 388:	e4 e1       	ldi	r30, 0x14	; 20
+ 38a:	f4 e0       	ldi	r31, 0x04	; 4
+ 38c:	80 81       	ld	r24, Z
+ 38e:	87 7f       	andi	r24, 0xF7	; 247
+ 390:	80 83       	st	Z, r24
+			PORTA_PIN3CTRL &= ~PORT_PULLUPEN_bm;
+ 392:	e3 e1       	ldi	r30, 0x13	; 19
+ 394:	f4 e0       	ldi	r31, 0x04	; 4
+ 396:	80 81       	ld	r24, Z
+ 398:	87 7f       	andi	r24, 0xF7	; 247
+ 39a:	80 83       	st	Z, r24
+			PORTB_PIN5CTRL &= ~PORT_PULLUPEN_bm;
+ 39c:	e5 e3       	ldi	r30, 0x35	; 53
+ 39e:	f4 e0       	ldi	r31, 0x04	; 4
+ 3a0:	80 81       	ld	r24, Z
+ 3a2:	87 7f       	andi	r24, 0xF7	; 247
+ 3a4:	80 83       	st	Z, r24
+			PORTB_PIN4CTRL &= ~PORT_PULLUPEN_bm;
+ 3a6:	e4 e3       	ldi	r30, 0x34	; 52
+ 3a8:	f4 e0       	ldi	r31, 0x04	; 4
+ 3aa:	80 81       	ld	r24, Z
+ 3ac:	87 7f       	andi	r24, 0xF7	; 247
+ 3ae:	80 83       	st	Z, r24
+ 3b0:	16 c0       	rjmp	.+44     	; 0x3de <main+0x194>
+		} else if (gate_type == 0x07) {
+ 3b2:	87 30       	cpi	r24, 0x07	; 7
+ 3b4:	29 f4       	brne	.+10     	; 0x3c0 <main+0x176>
+			gate_type = identify();	
+ 3b6:	0e 94 e1 00 	call	0x1c2	; 0x1c2 <identify>
+ 3ba:	80 93 19 40 	sts	0x4019, r24	; 0x804019 <gate_type>
+ 3be:	0f c0       	rjmp	.+30     	; 0x3de <main+0x194>
+		} else {
+			if (test(gate_type) == 1) PORTE_OUT &= ~PASS_bm;
+ 3c0:	0e 94 9b 00 	call	0x136	; 0x136 <test>
+ 3c4:	81 30       	cpi	r24, 0x01	; 1
+ 3c6:	31 f4       	brne	.+12     	; 0x3d4 <main+0x18a>
+ 3c8:	e4 e8       	ldi	r30, 0x84	; 132
+ 3ca:	f4 e0       	ldi	r31, 0x04	; 4
+ 3cc:	80 81       	ld	r24, Z
+ 3ce:	8e 7f       	andi	r24, 0xFE	; 254
+ 3d0:	80 83       	st	Z, r24
+ 3d2:	05 c0       	rjmp	.+10     	; 0x3de <main+0x194>
+			else PORTE_OUT &= ~FAIL_bm;
+ 3d4:	e4 e8       	ldi	r30, 0x84	; 132
+ 3d6:	f4 e0       	ldi	r31, 0x04	; 4
+ 3d8:	80 81       	ld	r24, Z
+ 3da:	8d 7f       	andi	r24, 0xFD	; 253
+ 3dc:	80 83       	st	Z, r24
+		}
+		
+		PORTC_OUT = stimulus[0];
+ 3de:	10 92 44 04 	sts	0x0444, r1	; 0x800444 <__TEXT_REGION_LENGTH__+0x7e0444>
+
+		PORTE_OUT |= TIP_bm;
+ 3e2:	e4 e8       	ldi	r30, 0x84	; 132
+ 3e4:	f4 e0       	ldi	r31, 0x04	; 4
+ 3e6:	80 81       	ld	r24, Z
+ 3e8:	84 60       	ori	r24, 0x04	; 4
+ 3ea:	80 83       	st	Z, r24
+				
+		PORTD_OUT = ~(gate_type & BARGRAPH_gm);
+ 3ec:	80 91 19 40 	lds	r24, 0x4019	; 0x804019 <gate_type>
+ 3f0:	87 70       	andi	r24, 0x07	; 7
+ 3f2:	80 95       	com	r24
+ 3f4:	80 93 64 04 	sts	0x0464, r24	; 0x800464 <__TEXT_REGION_LENGTH__+0x7e0464>
+
+		//turn DUT pin 14 off
+		PORTE_OUT &= ~PIN3_bm;
+ 3f8:	80 81       	ld	r24, Z
+ 3fa:	87 7f       	andi	r24, 0xF7	; 247
+ 3fc:	80 83       	st	Z, r24
+ 3fe:	79 cf       	rjmp	.-270    	; 0x2f2 <main+0xa8>
+
+00000400 <_exit>:
+ 400:	f8 94       	cli
+
+00000402 <__stop_program>:
+ 402:	ff cf       	rjmp	.-2      	; 0x402 <__stop_program>
