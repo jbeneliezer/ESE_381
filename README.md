@@ -7,3 +7,7 @@ The language for this class is embedded C, rather than assembly.
 The labs are each in a separate branch, so select branch of lab you wish to view.
 
 The target device is the AVR 128DB48 microcontroller.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8dc0a79bfc26b02bf2251c4bd9ba86231e7b8455
