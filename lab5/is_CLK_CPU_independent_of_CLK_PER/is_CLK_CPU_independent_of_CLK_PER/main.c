@@ -15,19 +15,20 @@ int main(void)
 	PORTC.DIRSET = PIN7_bm;														// enable output on pin 7 of PORT C
 
 	CPU_CCP = CCP_IOREG_gc;
-	CLKCTRL.MCLKCTRLA = CLKCTRL_CLKOUT_bm | CLKSEL_OSCHF_gc;					// main clock enabled on CLKOUT, main clock set to internal high frequency oscillator.
-	CPU_CCP = CCP_IOREG_gc;
-	CLKCTRL.MCLKCTRLB = CLKCTRL_PDIV_enable | CLKCTRL_PDIV_2X_gc;				// prescalar division enabled, prescaler set to 2
+	CLKCTRL.MCLKCTRLB = CLKCTRL_PDIV_enable | CLKCTRL_PDIV_4X_gc;				// prescalar division enabled, prescaler set to 4
 	CPU_CCP = CCP_IOREG_gc;
 	CLKCTRL.MCLKCTRLC = CLKCTRL_CFDSRC_CLKMAIN_gc | CLKCTRL_CFDEN_bm;			// clock failure source set to main clock, clock failure detection enabled.
 	CPU_CCP = CCP_IOREG_gc;
 	CLKCTRL.MCLKINTCTRL = CLKCTRL_INTTYPE_INT_gc;								// regular interrupt type.
 	CPU_CCP = CCP_IOREG_gc;
 	CLKCTRL.OSCHFCTRLA = CLKCTRL_RUNSTBY_bm | CLKCTRL_FREQSEL_4M_gc | CLKCTRL_AUTOTUNE_bm;				// run on standby enabled, autotune enabled.
+	CPU_CCP = CCP_IOREG_gc;
+	CLKCTRL.MCLKCTRLA = CLKCTRL_CLKOUT_bm | CLKSEL_OSCHF_gc;					// main clock enabled on CLKOUT, main clock set to internal high frequency oscillator.
+
 
     while (1) 
     {
-		PORTD.OUT = PIN7_bm ^ PORTD.OUT;										// toggle pin 7 of PORT C
+		PORTC.OUT = PIN7_bm ^ PORTC.OUT;										// toggle pin 7 of PORT C
     }
 }
 
