@@ -3,27 +3,27 @@ clk_main_32768Hz.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00804000  00804000  0000018c  2**0
+  0 .data         00000000  00804000  00804000  0000017c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000138  00000000  00000000  00000054  2**1
+  1 .text         00000128  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  0000018c  2**0
+  2 .comment      00000030  00000000  00000000  0000017c  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001bc  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001ac  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  000001fc  2**0
+  4 .debug_aranges 00000020  00000000  00000000  000001ec  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00003403  00000000  00000000  0000021c  2**0
+  5 .debug_info   00003379  00000000  00000000  0000020c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00002d85  00000000  00000000  0000361f  2**0
+  6 .debug_abbrev 00002d85  00000000  00000000  00003585  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000346  00000000  00000000  000063a4  2**0
+  7 .debug_line   00000322  00000000  00000000  0000630a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  000066ec  2**2
+  8 .debug_frame  00000024  00000000  00000000  0000662c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000019f0  00000000  00000000  00006710  2**0
+  9 .debug_str    00001854  00000000  00000000  00006650  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000010  00000000  00000000  00008100  2**0
+ 10 .debug_ranges 00000010  00000000  00000000  00007ea4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -99,7 +99,7 @@ Disassembly of section .text:
   fc:	df e7       	ldi	r29, 0x7F	; 127
   fe:	de bf       	out	0x3e, r29	; 62
  100:	0e 94 86 00 	call	0x10c	; 0x10c <main>
- 104:	0c 94 9a 00 	jmp	0x134	; 0x134 <_exit>
+ 104:	0c 94 92 00 	jmp	0x124	; 0x124 <_exit>
 
 00000108 <__bad_interrupt>:
  108:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -117,33 +117,19 @@ int main(void)
 	CPU_CCP = CCP_IOREG_gc;
  112:	88 ed       	ldi	r24, 0xD8	; 216
  114:	84 bf       	out	0x34, r24	; 52
-	CLKCTRL.MCLKCTRLA = CLKCTRL_CLKOUT_bm | CLKCTRL_CLKSEL_OSC32K_gc;			// main clock enabled on CLKOUT, main clock set to internal 32.768 kHz oscillator.
+	CLKCTRL.MCLKCTRLB = CLKCTRL_PDIV_disable;									// prescalar division disabled.
  116:	e0 e6       	ldi	r30, 0x60	; 96
  118:	f0 e0       	ldi	r31, 0x00	; 0
- 11a:	91 e8       	ldi	r25, 0x81	; 129
- 11c:	90 83       	st	Z, r25
+ 11a:	11 82       	std	Z+1, r1	; 0x01
 	CPU_CCP = CCP_IOREG_gc;
- 11e:	84 bf       	out	0x34, r24	; 52
-	CLKCTRL.MCLKCTRLB = CLKCTRL_PDIV_disable;									// prescalar division disabled.
- 120:	11 82       	std	Z+1, r1	; 0x01
-	CPU_CCP = CCP_IOREG_gc;
- 122:	84 bf       	out	0x34, r24	; 52
-	CLKCTRL.MCLKCTRLC = CLKCTRL_CFDSRC_CLKMAIN_gc | CLKCTRL_CFDEN_bm;			// clock failure source set to main clock, clock failure detection disabled.
- 124:	91 e0       	ldi	r25, 0x01	; 1
- 126:	92 83       	std	Z+2, r25	; 0x02
-	CPU_CCP = CCP_IOREG_gc;
- 128:	84 bf       	out	0x34, r24	; 52
-	CLKCTRL.MCLKINTCTRL = CLKCTRL_INTTYPE_INT_gc;								// regular interrupt type.
- 12a:	13 82       	std	Z+3, r1	; 0x03
-	CPU_CCP = CCP_IOREG_gc;
- 12c:	84 bf       	out	0x34, r24	; 52
-	CLKCTRL.OSCHFCTRLA = CLKCTRL_RUNSTBY_bm | CLKCTRL_FREQSEL_4M_gc | CLKCTRL_AUTOTUNE_bm;				// run on standby enabled, autotune enabled.
- 12e:	8d e8       	ldi	r24, 0x8D	; 141
- 130:	80 87       	std	Z+8, r24	; 0x08
- 132:	ff cf       	rjmp	.-2      	; 0x132 <main+0x26>
+ 11c:	84 bf       	out	0x34, r24	; 52
+	CLKCTRL.MCLKCTRLA = CLKCTRL_CLKOUT_bm | CLKCTRL_CLKSEL_OSC32K_gc;			// main clock enabled on CLKOUT, main clock set to internal 32.768 kHz oscillator.
+ 11e:	81 e8       	ldi	r24, 0x81	; 129
+ 120:	80 83       	st	Z, r24
+ 122:	ff cf       	rjmp	.-2      	; 0x122 <main+0x16>
 
-00000134 <_exit>:
- 134:	f8 94       	cli
+00000124 <_exit>:
+ 124:	f8 94       	cli
 
-00000136 <__stop_program>:
- 136:	ff cf       	rjmp	.-2      	; 0x136 <__stop_program>
+00000126 <__stop_program>:
+ 126:	ff cf       	rjmp	.-2      	; 0x126 <__stop_program>
