@@ -16,9 +16,10 @@
 int main(void)
 {
 	PORTA.DIRCLR = DIPS_gm;														// enable input on pin 7 and pin 6 of PORT A. 
-	PORTC.DIRSET = PIN7_bm;													// enable output on pin 7 of PORT C.
-	PORTA.PIN5CTRL |= PORT_PULLUPEN_bm;
-	PORTA.PIN4CTRL |= PORT_PULLUPEN_bm;
+	PORTC.DIRSET = PIN7_bm;													    // enable output on pin 7 of PORT C.
+
+	PORTA.PIN5CTRL |= PORT_PULLUPEN_bm;                                         // enable pullup on PA 5
+	PORTA.PIN4CTRL |= PORT_PULLUPEN_bm;                                         // enable pullup on PA 4
 	
 	CPU_CCP = CCP_IOREG_gc;
 	CLKCTRL.MCLKCTRLB = CLKCTRL_PDIV_disable;									// prescalar division disabled.
@@ -29,7 +30,7 @@ int main(void)
 	
     while (1) 
     {
-		PORTC.OUT = PIN7_bm ^ PORTC.OUT;										// toggle pin 7 of PORT C
+		PORTC.OUT = PIN7_bm ^ PORTC.OUT;										// toggle PC 7
 
 		d = ~(PORTA.IN | ~DIPS_gm);
 
