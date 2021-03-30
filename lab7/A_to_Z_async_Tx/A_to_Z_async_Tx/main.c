@@ -9,7 +9,6 @@
 #define F_CPU 4000000UL
 
 #include <avr/io.h>
-#include <util/delay.h>
 
 char c;
 
@@ -18,7 +17,7 @@ int main(void)
 
 	PORTB.DIRSET = PIN0_bm;																								// enable output on PB0.
 
-	USART3.BAUD = BAUD_RATE;																							// set baud rate.
+	USART3.BAUD = (64 * F_CPU)/(16 * BAUD_RATE);																		// set baud rate.
 	USART3.CTRLC = USART_CMODE_ASYNCHRONOUS_gc | USART_PMODE_DISABLED_gc | USART_SBMODE_1BIT_gc | USART_CHSIZE_8BIT_gc;	// Asynchronous mode, no parity bits, single stop bit, 8 bits data.
 	USART3.CTRLB = USART_TXEN_bm;																						// enable transmission.
 

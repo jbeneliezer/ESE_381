@@ -3,31 +3,31 @@ USART3_loopback.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00804000  00804000  0000023a  2**0
+  0 .data         00000000  00804000  00804000  00000250  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000001c6  00000000  00000000  00000074  2**1
+  1 .text         000001dc  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000001  00804000  00804000  0000023a  2**0
+  2 .bss          00000001  00804000  00804000  00000250  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000023a  2**0
+  3 .comment      00000030  00000000  00000000  00000250  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000026c  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000280  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000028  00000000  00000000  000002ac  2**0
+  5 .debug_aranges 00000028  00000000  00000000  000002c0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00003217  00000000  00000000  000002d4  2**0
+  6 .debug_info   000033c1  00000000  00000000  000002e8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00002dd6  00000000  00000000  000034eb  2**0
+  7 .debug_abbrev 00002de5  00000000  00000000  000036a9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000003a2  00000000  00000000  000062c1  2**0
+  8 .debug_line   000003c2  00000000  00000000  0000648e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000048  00000000  00000000  00006664  2**2
+  9 .debug_frame  00000048  00000000  00000000  00006850  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001892  00000000  00000000  000066ac  2**0
+ 10 .debug_str    00001946  00000000  00000000  00006898  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000049  00000000  00000000  00007f3e  2**0
+ 11 .debug_loc    00000049  00000000  00000000  000081de  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000018  00000000  00000000  00007f87  2**0
+ 12 .debug_ranges 00000018  00000000  00000000  00008227  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -86,7 +86,7 @@ Disassembly of section .text:
   c8:	0c 94 8c 00 	jmp	0x118	; 0x118 <__bad_interrupt>
   cc:	0c 94 8c 00 	jmp	0x118	; 0x118 <__bad_interrupt>
   d0:	0c 94 8c 00 	jmp	0x118	; 0x118 <__bad_interrupt>
-  d4:	0c 94 a6 00 	jmp	0x14c	; 0x14c <__vector_53>
+  d4:	0c 94 ad 00 	jmp	0x15a	; 0x15a <__vector_53>
   d8:	0c 94 8c 00 	jmp	0x118	; 0x118 <__bad_interrupt>
   dc:	0c 94 8c 00 	jmp	0x118	; 0x118 <__bad_interrupt>
   e0:	0c 94 8c 00 	jmp	0x118	; 0x118 <__bad_interrupt>
@@ -117,7 +117,7 @@ Disassembly of section .text:
  10c:	b2 07       	cpc	r27, r18
  10e:	e1 f7       	brne	.-8      	; 0x108 <.do_clear_bss_loop>
  110:	0e 94 8e 00 	call	0x11c	; 0x11c <main>
- 114:	0c 94 e1 00 	jmp	0x1c2	; 0x1c2 <_exit>
+ 114:	0c 94 ec 00 	jmp	0x1d8	; 0x1d8 <_exit>
 
 00000118 <__bad_interrupt>:
  118:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -128,114 +128,131 @@ char c;
 int main(void)
 {
 
-	USART3.BAUD = BAUD_RATE;																							// set baud rate.
- 11c:	e0 e6       	ldi	r30, 0x60	; 96
- 11e:	f8 e0       	ldi	r31, 0x08	; 8
- 120:	80 e8       	ldi	r24, 0x80	; 128
- 122:	95 e2       	ldi	r25, 0x25	; 37
- 124:	80 87       	std	Z+8, r24	; 0x08
- 126:	91 87       	std	Z+9, r25	; 0x09
+	PORTB.DIRSET = PIN0_bm;																								// enable output on PB0.
+ 11c:	e0 e2       	ldi	r30, 0x20	; 32
+ 11e:	f4 e0       	ldi	r31, 0x04	; 4
+ 120:	81 e0       	ldi	r24, 0x01	; 1
+ 122:	81 83       	std	Z+1, r24	; 0x01
+	PORTB.DIRCLR = PIN1_bm;																								// enable intput on PB1.
+ 124:	82 e0       	ldi	r24, 0x02	; 2
+ 126:	82 83       	std	Z+2, r24	; 0x02
+
+	USART3.BAUD = (64 * F_CPU)/(16 * BAUD_RATE);																		// set baud rate.
+ 128:	e0 e6       	ldi	r30, 0x60	; 96
+ 12a:	f8 e0       	ldi	r31, 0x08	; 8
+ 12c:	82 e8       	ldi	r24, 0x82	; 130
+ 12e:	96 e0       	ldi	r25, 0x06	; 6
+ 130:	80 87       	std	Z+8, r24	; 0x08
+ 132:	91 87       	std	Z+9, r25	; 0x09
 	USART3.CTRLC = USART_CMODE_ASYNCHRONOUS_gc | USART_PMODE_DISABLED_gc | USART_SBMODE_1BIT_gc | USART_CHSIZE_8BIT_gc;	// Asynchronous mode, no parity bits, single stop bit, 8 bits data.
- 128:	83 e0       	ldi	r24, 0x03	; 3
- 12a:	87 83       	std	Z+7, r24	; 0x07
+ 134:	83 e0       	ldi	r24, 0x03	; 3
+ 136:	87 83       	std	Z+7, r24	; 0x07
 	USART3.CTRLB = USART_TXEN_bm | USART_RXEN_bm;																		// enable transmission, enable receiving.
- 12c:	80 ec       	ldi	r24, 0xC0	; 192
- 12e:	86 83       	std	Z+6, r24	; 0x06
-	USART3.CTRLA = USART_RXCIE_bm;																						// enable RX complete interrupt.
- 130:	80 e8       	ldi	r24, 0x80	; 128
- 132:	85 83       	std	Z+5, r24	; 0x05
+ 138:	80 ec       	ldi	r24, 0xC0	; 192
+ 13a:	86 83       	std	Z+6, r24	; 0x06
+	USART3.CTRLA = USART_RXCIE_bm | USART_LBME_bm;																		// enable RX complete interrupt, loopback enabled.
+ 13c:	88 e8       	ldi	r24, 0x88	; 136
+ 13e:	85 83       	std	Z+5, r24	; 0x05
 	
 	sei();
- 134:	78 94       	sei
+ 140:	78 94       	sei
 
 	c = 'A';
- 136:	81 e4       	ldi	r24, 0x41	; 65
- 138:	80 93 00 40 	sts	0x4000, r24	; 0x804000 <_edata>
+ 142:	81 e4       	ldi	r24, 0x41	; 65
+ 144:	80 93 00 40 	sts	0x4000, r24	; 0x804000 <__DATA_REGION_ORIGIN__>
 	
 	while ((USART3.STATUS & USART_DREIF_bm) != USART_DREIF_bm){}														// wait till buffer is empty.
- 13c:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
- 140:	85 ff       	sbrs	r24, 5
- 142:	fc cf       	rjmp	.-8      	; 0x13c <main+0x20>
+ 148:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
+ 14c:	85 ff       	sbrs	r24, 5
+ 14e:	fc cf       	rjmp	.-8      	; 0x148 <main+0x2c>
 	USART3.TXDATAL = c;																									// transmit c
- 144:	81 e4       	ldi	r24, 0x41	; 65
- 146:	80 93 62 08 	sts	0x0862, r24	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
- 14a:	ff cf       	rjmp	.-2      	; 0x14a <main+0x2e>
+ 150:	81 e4       	ldi	r24, 0x41	; 65
+ 152:	80 93 62 08 	sts	0x0862, r24	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
 
-0000014c <__vector_53>:
 	while (1)
 	{
+		__asm("nop");
+ 156:	00 00       	nop
+ 158:	fe cf       	rjmp	.-4      	; 0x156 <main+0x3a>
+
+0000015a <__vector_53>:
 	}
 }
 
 ISR (USART3_RXC_vect) {
- 14c:	1f 92       	push	r1
- 14e:	0f 92       	push	r0
- 150:	0f b6       	in	r0, 0x3f	; 63
- 152:	0f 92       	push	r0
- 154:	11 24       	eor	r1, r1
- 156:	8f 93       	push	r24
- 158:	9f 93       	push	r25
+ 15a:	1f 92       	push	r1
+ 15c:	0f 92       	push	r0
+ 15e:	0f b6       	in	r0, 0x3f	; 63
+ 160:	0f 92       	push	r0
+ 162:	11 24       	eor	r1, r1
+ 164:	8f 93       	push	r24
+ 166:	9f 93       	push	r25
 	if ((USART3.STATUS & USART_RXCIF_bm) == USART_RXCIF_bm) {
- 15a:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
- 15e:	88 23       	and	r24, r24
- 160:	4c f5       	brge	.+82     	; 0x1b4 <__vector_53+0x68>
-		if (USART3.RXDATAH != 0x00) return;
- 162:	80 91 61 08 	lds	r24, 0x0861	; 0x800861 <__TEXT_REGION_LENGTH__+0x7e0861>
- 166:	81 11       	cpse	r24, r1
- 168:	25 c0       	rjmp	.+74     	; 0x1b4 <__vector_53+0x68>
+ 168:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
+ 16c:	88 23       	and	r24, r24
+ 16e:	6c f5       	brge	.+90     	; 0x1ca <__vector_53+0x70>
 		c = USART3.RXDATAL;
- 16a:	90 91 60 08 	lds	r25, 0x0860	; 0x800860 <__TEXT_REGION_LENGTH__+0x7e0860>
- 16e:	90 93 00 40 	sts	0x4000, r25	; 0x804000 <_edata>
+ 170:	90 91 60 08 	lds	r25, 0x0860	; 0x800860 <__TEXT_REGION_LENGTH__+0x7e0860>
+ 174:	90 93 00 40 	sts	0x4000, r25	; 0x804000 <__DATA_REGION_ORIGIN__>
 
 		if (c >= 'A' && c <= 'Z') {
- 172:	8f eb       	ldi	r24, 0xBF	; 191
- 174:	89 0f       	add	r24, r25
- 176:	8a 31       	cpi	r24, 0x1A	; 26
- 178:	40 f4       	brcc	.+16     	; 0x18a <__vector_53+0x3e>
+ 178:	8f eb       	ldi	r24, 0xBF	; 191
+ 17a:	89 0f       	add	r24, r25
+ 17c:	8a 31       	cpi	r24, 0x1A	; 26
+ 17e:	40 f4       	brcc	.+16     	; 0x190 <__vector_53+0x36>
 			while ((USART3.STATUS & USART_DREIF_bm) != USART_DREIF_bm){}												// wait till buffer is empty.
- 17a:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
- 17e:	85 ff       	sbrs	r24, 5
- 180:	fc cf       	rjmp	.-8      	; 0x17a <__vector_53+0x2e>
-			USART3.TXDATAL = c + 20;																					// send lowercase character.
- 182:	9c 5e       	subi	r25, 0xEC	; 236
- 184:	90 93 62 08 	sts	0x0862, r25	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
- 188:	15 c0       	rjmp	.+42     	; 0x1b4 <__vector_53+0x68>
+ 180:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
+ 184:	85 ff       	sbrs	r24, 5
+ 186:	fc cf       	rjmp	.-8      	; 0x180 <__vector_53+0x26>
+			USART3.TXDATAL = (c + 0x20);																				// send lowercase character.jjkkjjj
+ 188:	90 5e       	subi	r25, 0xE0	; 224
+ 18a:	90 93 62 08 	sts	0x0862, r25	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
+ 18e:	1d c0       	rjmp	.+58     	; 0x1ca <__vector_53+0x70>
 		} else if (c >= 'a' && c < 'z') {
- 18a:	8f e9       	ldi	r24, 0x9F	; 159
- 18c:	89 0f       	add	r24, r25
- 18e:	89 31       	cpi	r24, 0x19	; 25
- 190:	40 f4       	brcc	.+16     	; 0x1a2 <__vector_53+0x56>
+ 190:	8f e9       	ldi	r24, 0x9F	; 159
+ 192:	89 0f       	add	r24, r25
+ 194:	89 31       	cpi	r24, 0x19	; 25
+ 196:	40 f4       	brcc	.+16     	; 0x1a8 <__vector_53+0x4e>
 			while ((USART3.STATUS & USART_DREIF_bm) != USART_DREIF_bm){}												// wait till buffer is empty.
- 192:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
- 196:	85 ff       	sbrs	r24, 5
- 198:	fc cf       	rjmp	.-8      	; 0x192 <__vector_53+0x46>
-			USART3.TXDATAL = c - 19;																					// send next uppercase character.
- 19a:	93 51       	subi	r25, 0x13	; 19
- 19c:	90 93 62 08 	sts	0x0862, r25	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
- 1a0:	09 c0       	rjmp	.+18     	; 0x1b4 <__vector_53+0x68>
+ 198:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
+ 19c:	85 ff       	sbrs	r24, 5
+ 19e:	fc cf       	rjmp	.-8      	; 0x198 <__vector_53+0x3e>
+			USART3.TXDATAL = (c - 0x1F);																				// send next uppercase character.
+ 1a0:	9f 51       	subi	r25, 0x1F	; 31
+ 1a2:	90 93 62 08 	sts	0x0862, r25	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
+ 1a6:	11 c0       	rjmp	.+34     	; 0x1ca <__vector_53+0x70>
 		} else if (c == 'z') {
- 1a2:	9a 37       	cpi	r25, 0x7A	; 122
- 1a4:	39 f4       	brne	.+14     	; 0x1b4 <__vector_53+0x68>
+ 1a8:	9a 37       	cpi	r25, 0x7A	; 122
+ 1aa:	41 f4       	brne	.+16     	; 0x1bc <__vector_53+0x62>
 			while ((USART3.STATUS & USART_DREIF_bm) != USART_DREIF_bm){}												// wait till buffer is empty.
- 1a6:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
- 1aa:	85 ff       	sbrs	r24, 5
- 1ac:	fc cf       	rjmp	.-8      	; 0x1a6 <__vector_53+0x5a>
+ 1ac:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
+ 1b0:	85 ff       	sbrs	r24, 5
+ 1b2:	fc cf       	rjmp	.-8      	; 0x1ac <__vector_53+0x52>
 			USART3.TXDATAL = 'A';																						// send 'A'
- 1ae:	81 e4       	ldi	r24, 0x41	; 65
- 1b0:	80 93 62 08 	sts	0x0862, r24	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
+ 1b4:	81 e4       	ldi	r24, 0x41	; 65
+ 1b6:	80 93 62 08 	sts	0x0862, r24	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
+ 1ba:	07 c0       	rjmp	.+14     	; 0x1ca <__vector_53+0x70>
+		} else {
+			while ((USART3.STATUS & USART_DREIF_bm) != USART_DREIF_bm){}												// wait till buffer is empty.
+ 1bc:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <__TEXT_REGION_LENGTH__+0x7e0864>
+ 1c0:	85 ff       	sbrs	r24, 5
+ 1c2:	fc cf       	rjmp	.-8      	; 0x1bc <__vector_53+0x62>
+			USART3.TXDATAL = 'A';																						// send 'A'
+ 1c4:	81 e4       	ldi	r24, 0x41	; 65
+ 1c6:	80 93 62 08 	sts	0x0862, r24	; 0x800862 <__TEXT_REGION_LENGTH__+0x7e0862>
 		}
 	}
 }
- 1b4:	9f 91       	pop	r25
- 1b6:	8f 91       	pop	r24
- 1b8:	0f 90       	pop	r0
- 1ba:	0f be       	out	0x3f, r0	; 63
- 1bc:	0f 90       	pop	r0
- 1be:	1f 90       	pop	r1
- 1c0:	18 95       	reti
+ 1ca:	9f 91       	pop	r25
+ 1cc:	8f 91       	pop	r24
+ 1ce:	0f 90       	pop	r0
+ 1d0:	0f be       	out	0x3f, r0	; 63
+ 1d2:	0f 90       	pop	r0
+ 1d4:	1f 90       	pop	r1
+ 1d6:	18 95       	reti
 
-000001c2 <_exit>:
- 1c2:	f8 94       	cli
+000001d8 <_exit>:
+ 1d8:	f8 94       	cli
 
-000001c4 <__stop_program>:
- 1c4:	ff cf       	rjmp	.-2      	; 0x1c4 <__stop_program>
+000001da <__stop_program>:
+ 1da:	ff cf       	rjmp	.-2      	; 0x1da <__stop_program>

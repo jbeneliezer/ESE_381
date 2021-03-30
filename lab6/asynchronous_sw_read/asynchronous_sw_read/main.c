@@ -27,11 +27,11 @@ uint8_t USART_sw_read() {
 	
 	uint8_t d;															// bit time.
 	if (BAUD_RATE == 4800L) {
-		d = 48;
+		d = 205;
 	} else if (BAUD_RATE == 9600L) {
-		d = 99;
+		d = 102;
 	} else if (BAUD_RATE == 19200L) {
-		d = 201;
+		d = 50;
 	} else return 0x00;
 
 	uint8_t data = 0;
@@ -44,8 +44,8 @@ uint8_t USART_sw_read() {
 		_delay_us(d);														// delay for bit time.
 
 		uint8_t i = 0;
-		for (i; i < 8; ++i) {
-			data >>= data | ((PORTB_IN | PIN1_bm) << 6);					// read little endian input.
+		for (; i < 8; ++i) {
+			data = (data >> 1) | ((PORTB_IN & PIN1_bm) << 6);						// read little endian input.
 			_delay_us(d);													// delay for bit time.
 		}
 		reading = 0;

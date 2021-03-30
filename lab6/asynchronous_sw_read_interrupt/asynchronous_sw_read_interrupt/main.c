@@ -14,10 +14,12 @@
 
 uint8_t USART_sw_read();													// declaration for read function.
 
+char c;
+
 int main(void)
 {
 	PORTB.DIRCLR = PIN1_bm;													// set PB1 as input.
-	PORTB.PIN1CTRL |= PORT_ISC_FALLING_gc;									// enable interrupt on falling edge.
+	PORTB.PIN1CTRL = PORT_ISC_FALLING_gc;				// enable interrupt on falling edge.
 	sei();																	// enable global interrupts.
 	
     while (1) 
@@ -28,29 +30,27 @@ int main(void)
 
 ISR (PORTB_PORT_vect) {
 	c = USART_sw_read();													// call USART_sw_read.
-	PORTB.INTFLAGS |= PIN1_bm;												// clear interupt.
+	PORTB.INTFLAGS |= PIN1_bm;												// clear interrupt.
 }
 
 uint8_t USART_sw_read() {
 
-	uint8_t d;																// bit time.
+	uint8_t d, data = 0x00;
 	if (BAUD_RATE == 4800UL) {
-		d = 48;
+		d = 205;
 	} else if (BAUD_RATE == 9600UL) {
-		d = 99;
+		d = 102;
 	} else if (BAUD_RATE == 19200UL) {
-		d = 201;
+		d = 50;
 	} else return 0x00;
 
-	uint8_t data = 0;
-
 	_delay_us(d/2);
-	if ((PORTB_IN & PIN1_bm) != 0) return 0x00;								// check for false start.
+	if ((PORTB_IN & PIN1_bm) == PIN1_bm) return 0x00;						// check for false start.
 	_delay_us(d);															// delay for bit time.
 
 	uint8_t i;
 	for (i = 0; i < 8; ++i) {
-		data >>= data | ((PORTB_IN | PIN1_bm) << 6);						// read little endian input into data.
+		data = (data >> 1) | ((PORTB_IN & PIN1_bm) << 6);					// read little endian input into data.
 		_delay_us(d);														// delay for bit time.
 	}
 
