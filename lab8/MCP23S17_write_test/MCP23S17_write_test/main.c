@@ -30,6 +30,8 @@ int main(void)
 
 	SPI0.CTRLA = SPI_ENABLE_bm | SPI_MASTER_bm | SPI_PRESC_DIV4_gc;
 	SPI0.CTRLB = SPI_SSD_bm;
+
+	PORTF.OUT = PIN2_bm;
 	
 	uint8_t i = 0xFF;
 
@@ -43,15 +45,15 @@ int main(void)
 			++i;
 		}
 		MCP23S17_SPI_write(WRITE_opcode, OLATBaddr_b1, ~i);
-		_delay_ms(5000);
+		_delay_ms(500);
     }
 }
 
 void MCP23S17_SPI_init()
 {
 	MCP23S17_SPI_write(WRITE_opcode, IOCONaddr_b0, 0x80);
-	MCP23S17_SPI_write(WRITE_opcode, IODIRAaddr_b1, 0x00);
-	MCP23S17_SPI_write(WRITE_opcode, IODIRBaddr_b1, 0xFF);
+	MCP23S17_SPI_write(WRITE_opcode, IODIRAaddr_b1, 0xFF);
+	MCP23S17_SPI_write(WRITE_opcode, IODIRBaddr_b1, 0x00);
 	MCP23S17_SPI_write(WRITE_opcode, GPPUAaddr_b1, 0xFF);
 }
 
