@@ -19,7 +19,7 @@ int main(void)
 	while (1)
 	{
 		write_read_RTC_test();
-		_delay_ms(1);
+		_delay_ms(10);
 		
 	}
 

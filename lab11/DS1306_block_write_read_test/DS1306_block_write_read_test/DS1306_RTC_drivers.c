@@ -15,6 +15,11 @@
 #include <util/delay.h>
 #include "DS1306_RTC_drivers.h"
 
+volatile unsigned char RTC_time_date_write[7];
+volatile unsigned char RTC_time_date_read[7];
+
+
+
 //***************************************************************************
 // Function : void write_RTC (unsigned char reg_RTC, unsigned char data_RTC)
 // Date and version : 041221, version 1.0
@@ -30,10 +35,12 @@
 void write_RTC (unsigned char reg_RTC, unsigned char data_RTC)
 {
 	PORTC.OUT |= PIN1_bm;
-	SPI0.DATA = 0x80 | reg_RTC;
+	_delay_us(4);
+	SPI0.DATA = reg_RTC;
 	while ((SPI0.INTFLAGS & PIN7_bm) == 0x00) {}
 	SPI0.DATA = data_RTC;
 	PORTC.OUT &= ~PIN1_bm;
+	_delay_us(4);
 }
 
 //***************************************************************************
@@ -63,10 +70,11 @@ unsigned char read_RTC (unsigned char reg_RTC)
 // This function writes a block of data from an array to the DS1306. strt_addr
 // is the starting address in the DS1306. count is the number of data bytes to
 // be transferred and array_ptr is the address of the source array.
-void block_write_RTC (volatile unsigned char *array_ptr, unsigned char strt_addr, unsigned char count)
+void block_write_RTC (volatile unsigned char *array_ptr, unsigned char strt_addr, unsigned char count)	
 {
 	uint8_t i = 0x01;
 	PORTC.OUT |= PIN1_bm;
+	_delay_us(4);
 	SPI0.DATA = 0x80 | strt_addr;
 	while ((SPI0.INTFLAGS & PIN7_bm) == 0x00) {}
 	SPI0.DATA = *array_ptr;
@@ -78,8 +86,8 @@ void block_write_RTC (volatile unsigned char *array_ptr, unsigned char strt_addr
 		while ((SPI0.INTFLAGS & PIN7_bm) == 0x00) {}
 		++count;
 	}
-
 	PORTC.OUT &= ~PIN1_bm;
+	_delay_us(4);
 }
 
 //***************************************************************************
@@ -98,6 +106,7 @@ void block_read_RTC (volatile unsigned char *array_ptr, unsigned char strt_addr,
 {
 	uint8_t i = 0x00;
 	PORTC.OUT |= PIN1_bm;
+	_delay_us(4);
 	SPI0.DATA = strt_addr;
 	while ((SPI0.INTFLAGS & PIN7_bm) == 0x00) {}
 	SPI0.DATA = 0x00;
@@ -105,10 +114,11 @@ void block_read_RTC (volatile unsigned char *array_ptr, unsigned char strt_addr,
 	
 	while (i < count)
 	{
-		array_ptr[i] = SPI0.DATA;
+		array_ptr[i++] = SPI0.DATA;
 		while ((SPI0.INTFLAGS & PIN7_bm) == 0x00) {}
 	}
 	PORTC.OUT &= ~PIN1_bm;
+	_delay_us(4);
 }
 	
 
@@ -153,7 +163,7 @@ void write_read_RTC_test(void)
 	uint8_t i = 0x00;
 	for (; i < 0x0A; ++i)
 	{
-		write_RTC(RAM_BEGIN + i, 'U');
+		write_RTC((RAM_BEGIN + i) | 0x80, 'U');
 		RTC_byte[i] = read_RTC(RAM_BEGIN + i);
 	}
 }
@@ -174,14 +184,15 @@ void block_write_read_RTC_test(void)
 {
 	write_RTC(CTRL_REG_WRITE, 0x00);
 	block_read_RTC(RTC_time_date_read, 0x00, 7);
-	RTC_time_date_write = RTC_time_date_read;
+	memcpy(RTC_time_date_write, RTC_time_date_read, sizeof(RTC_time_date_read));
 	block_write_RTC(RTC_time_date_write, 0x00, 7);
 	while (1)
 	{
 		block_read_RTC(RTC_time_date_read, 0x00, 7);
-		RTC_time_date_write = RTC_time_date_read;
+		memcpy(RTC_time_date_write, RTC_time_date_read, sizeof(RTC_time_date_read));
 		block_write_RTC(RTC_time_date_write, 0x00, 7);	
 		_delay_ms(10);
 	}
 	
 }
+

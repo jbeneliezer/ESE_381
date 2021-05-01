@@ -5,12 +5,14 @@
  * Author : Judah Ben-Eliezer
  */ 
 
+#define F_CPU 4000000UL
 #define CTRL_REG_READ 0x0F
 #define CTRL_REG_WRITE 0x8F
 #define RAM_BEGIN 0x20
 #define RAM_END 0x7F
 
 #include <avr/io.h>
+#include <util/delay.h>
 #include "DS1306_RTC_drivers.h"
 
 //***************************************************************************
@@ -28,10 +30,13 @@
 void write_RTC (unsigned char reg_RTC, unsigned char data_RTC)
 {
 	PORTC.OUT |= PIN1_bm;
-	SPI0.DATA = 0x80 | reg_RTC;
+	_delay_us(4);
+	SPI0.DATA = reg_RTC;
 	while ((SPI0.INTFLAGS & PIN7_bm) == 0x00) {}
 	SPI0.DATA = data_RTC;
+	while ((SPI0.INTFLAGS & PIN7_bm) == 0x00) {}
 	PORTC.OUT &= ~PIN1_bm;
+	_delay_us(4);
 }
 
 //***************************************************************************
@@ -65,9 +70,11 @@ unsigned char read_RTC (unsigned char reg_RTC)
 void SPI_rtc_ds1306_config(void)
 {
 	PORTC.DIR = PIN1_bm;
-	PORTA.DIR = (PIN4_bm & ~PIN5_bm) | PIN6_bm;
-	SPI0.CTRLA = SPI_ENABLE_bm | SPI_MASTER_bm;
-	SPI0.CTRLB = SPI_SSD_bm | SPI_MODE1_bm;}
+	PORTA.DIRSET = PIN4_bm | PIN6_bm;
+	PORTA.DIRCLR = PIN5_bm;
+	SPI0.CTRLA = SPI_ENABLE_bm | SPI_MASTER_bm; 
+	SPI0.CTRLB = SPI_SSD_bm | SPI_MODE_3_gc;
+}
 
 
 //***************************************************************************
@@ -83,11 +90,12 @@ void SPI_rtc_ds1306_config(void)
 //**************************************************************************
 void write_read_RTC_test(void)
 {
-	uint8_t RTC_byte[10];
+	volatile uint8_t RTC_byte[10];
 	uint8_t i = 0x00;
+	write_RTC(CTRL_REG_WRITE, 0x00);
 	for (; i < 0x0A; ++i)
 	{
-		write_RTC(RAM_BEGIN + i, 'U');
+		write_RTC((RAM_BEGIN + i) | 0x80, 'U');
 		RTC_byte[i] = read_RTC(RAM_BEGIN + i);
 	}
 }
