@@ -62,10 +62,10 @@ ISR (USART3_RXC_vect) {
 ISR (PORTC_PORT_vect) {
 	/* display time */
 	char* _time = bcd2int(read_RTC(HOUR_addr) | 0x3F);
-	_time = strncat(_time, (char*) ":", 1);
-	_time = strncat(_time, bcd2int(read_RTC(MIN_addr)), 8);
-	_time = strncat(_time, (char*) ":", 1);
-	_time = strncat(_time, bcd2int(read_RTC(SEC_addr)), 8);
+	strncat(_time, (char*) ":", 1);
+	strncat(_time, bcd2int(read_RTC(MIN_addr)), 8);
+	strncat(_time, (char*) ":", 1);
+	strncat(_time, bcd2int(read_RTC(SEC_addr)), 8);
 	
 	write_line(1, _time);
 	PORTC.INTFLAGS |= PIN2_bm;
